@@ -22,8 +22,18 @@ final class AudioPlayerViewModel: ObservableObject {
     @Published var isShuffled = false
     @Published var repeatMode: RepeatMode = .off
 
-    // MARK: - Spectrum
+    // MARK: - Spectrum & Strobo
     @Published var spectrumData: [Float] = Array(repeating: 0, count: 32)
+    @Published var strobeEnabled = false
+    @Published var strobeMode: StrobeMode = .rings
+
+    func toggleStrobe() {
+        strobeEnabled.toggle()
+    }
+
+    func cycleStrobeMode() {
+        strobeMode = strobeMode.next
+    }
 
     // MARK: - Display
     @Published var scrollingTitle = ""

@@ -19,6 +19,7 @@
 		AA000010 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB000010; };
 		AA000011 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB000011; };
 		AA000012 /* SpectrumAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB000012; };
+		AA000013 /* StrobeEffectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB000013; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		AB000010 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB000011 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AB000012 /* SpectrumAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumAnalyzer.swift; sourceTree = "<group>"; };
+		AB000013 /* StrobeEffectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrobeEffectsView.swift; sourceTree = "<group>"; };
 		AB000020 /* Mousike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mousike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB000030 /* Mousike.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Mousike.entitlements; sourceTree = "<group>"; };
 		AB000031 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				AB000007 /* PlaylistView.swift */,
 				AB000008 /* ThemePickerView.swift */,
 				AB000009 /* VisualizerView.swift */,
+				AB000013 /* StrobeEffectsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 				AA000009 /* VisualizerView.swift in Sources */,
 				AA000011 /* ContentView.swift in Sources */,
 				AA000012 /* SpectrumAnalyzer.swift in Sources */,
+				AA000013 /* StrobeEffectsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
