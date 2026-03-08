@@ -275,6 +275,17 @@ final class AudioPlayerViewModel: ObservableObject {
 
     // MARK: - Private Helpers
 
+    private func rebuildShuffleOrder() {
+        shuffledIndices = Array(playlist.indices).shuffled()
+        if let current = currentTrackIndex,
+           let pos = shuffledIndices.firstIndex(of: current) {
+            shuffledIndices.swapAt(0, pos)
+            shufflePosition = 0
+        } else {
+            shufflePosition = 0
+        }
+    }
+
     private func loadAndPlay(track: Track) {
         do {
             _ = track.url.startAccessingSecurityScopedResource()
