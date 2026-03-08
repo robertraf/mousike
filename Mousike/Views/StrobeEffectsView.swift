@@ -200,13 +200,15 @@ struct StrobeEffectsView: View {
 
             let startAngle = angle + rotation
             let innerRadius = maxLength * 0.08
+            let cosAngle = CGFloat(Darwin.cos(startAngle))
+            let sinAngle = CGFloat(Darwin.sin(startAngle))
             let start = CGPoint(
-                x: center.x + cos(startAngle) * innerRadius,
-                y: center.y + sin(startAngle) * innerRadius
+                x: center.x + cosAngle * innerRadius,
+                y: center.y + sinAngle * innerRadius
             )
             let end = CGPoint(
-                x: center.x + cos(startAngle) * rayLength,
-                y: center.y + sin(startAngle) * rayLength
+                x: center.x + cosAngle * rayLength,
+                y: center.y + sinAngle * rayLength
             )
 
             let progress = Double(i) / Double(rayCount)
@@ -244,21 +246,23 @@ struct StrobeEffectsView: View {
                 amount: progress
             )
 
+            let steps = Int(size.width)
+            let amplitude = size.height * 0.12 * (0.5 + energy)
             let path = Path { p in
-                let steps = Int(size.width)
                 for s in 0...steps {
                     let x = CGFloat(s)
                     let normalizedX = Double(s) / Double(steps)
 
                     // Map x position to spectrum band
                     let bandIndex = min(Int(normalizedX * Double(spectrumData.count)), spectrumData.count - 1)
-                    let magnitude = spectrumData.isEmpty ? Float(0.1) : spectrumData[max(0, bandIndex)]
+                    let magnitude = spectrumData.isEmpty ? 0.1 : Double(spectrumData[max(0, bandIndex)])
 
-                    let wave1 = sin(normalizedX * .pi * 4.0 + time * (1.5 + waveOffset) + Double(magnitude) * 3.0)
-                    let wave2 = sin(normalizedX * .pi * 7.0 - time * (0.8 + waveOffset))
-                    let combined = (wave1 * 0.6 + wave2 * 0.4) * Double(magnitude)
+                    let phase1 = normalizedX * .pi * 4.0 + time * (1.5 + waveOffset)
+                    let wave1 = sin(phase1 + magnitude * 3.0)
+                    let phase2 = normalizedX * .pi * 7.0 - time * (0.8 + waveOffset)
+                    let wave2 = sin(phase2)
+                    let combined = (wave1 * 0.6 + wave2 * 0.4) * magnitude
 
-                    let amplitude = size.height * 0.12 * (0.5 + energy * 1.0)
                     let y = yCenter + combined * amplitude
 
                     if s == 0 {
