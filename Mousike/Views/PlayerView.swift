@@ -10,6 +10,9 @@ struct PlayerView: View {
         VStack(spacing: 0) {
             titleBar
             displayPanel
+            if player.strobeEnabled {
+                strobePanel
+            }
             controlsPanel
         }
         .background(theme.background)
@@ -99,6 +102,33 @@ struct PlayerView: View {
         .padding(.top, 4)
     }
 
+    // MARK: - Strobe Effects Panel
+
+    private var strobePanel: some View {
+        StrobeEffectsView(
+            spectrumData: player.spectrumData,
+            theme: theme,
+            mode: player.strobeMode
+        )
+        .frame(height: 120)
+        .overlay(
+            // Mode label
+            HStack {
+                Spacer()
+                Text(player.strobeMode.rawValue.uppercased())
+                    .font(.system(size: 8, weight: .bold, design: .monospaced))
+                    .foregroundColor(theme.displayText.opacity(0.5))
+                    .padding(4)
+            },
+            alignment: .topTrailing
+        )
+        .padding(.horizontal, 6)
+        .padding(.top, 4)
+        .onTapGesture {
+            player.cycleStrobeMode()
+        }
+    }
+
     // MARK: - Controls
 
     private var controlsPanel: some View {
@@ -117,13 +147,16 @@ struct PlayerView: View {
             }
             .padding(.horizontal, 8)
 
-            // Bottom row: shuffle, repeat, EQ, theme
+            // Bottom row: shuffle, repeat, strobe, add
             HStack(spacing: 8) {
                 toggleButton("SHF", isActive: player.isShuffled) {
                     player.toggleShuffle()
                 }
                 toggleButton(repeatLabel, isActive: player.repeatMode != .off) {
                     player.cycleRepeatMode()
+                }
+                toggleButton("STR", isActive: player.strobeEnabled) {
+                    player.toggleStrobe()
                 }
 
                 Spacer()

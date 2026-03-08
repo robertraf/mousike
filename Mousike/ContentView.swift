@@ -20,7 +20,7 @@ struct ContentView: View {
 
             PlaylistView(player: player, themeManager: themeManager)
         }
-        .frame(minWidth: 320, maxWidth: 320, minHeight: 450)
+        .frame(minWidth: 320, maxWidth: 320, minHeight: 450, maxHeight: 700)
         .background(theme.background)
         .overlay(dropOverlay)
         .onDrop(of: [.audio, .fileURL], isTargeted: $isDropTargeted) { providers in
